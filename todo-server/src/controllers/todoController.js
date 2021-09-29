@@ -1,3 +1,7 @@
+const mongoose = require('mongoose');
+
+const Todo = mongoose.model('Todo');
+
 const getTodoList = (req, res) => {
   // get todolist from mongodb
 
