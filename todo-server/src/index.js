@@ -1,11 +1,13 @@
 const { urlencoded } = require("express");
 const express = require("express");
 const mongoose = require("mongoose");
+const todoRoutes = require('./routes/todoRoutes');
 
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use('/',todoRoutes);
 
 const mongoUri = 'mongodb+srv://kicki:admin@cluster0.dca84.mongodb.net/todoDB?retryWrites=true&w=majority';
 mongoose.connect(mongoUri, {

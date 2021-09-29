@@ -14,4 +14,4 @@ router.post("/todo-list/:id", todoCtrl.updateTodoItem);
 
 router.delete("/todo-list/:id", todoCtrl.deleteTodoItem);
 
-module.export = router;
+module.exports = router;
