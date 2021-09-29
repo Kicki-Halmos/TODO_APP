@@ -23,7 +23,7 @@ mongoose.connection.on('error', (err) => {
 })
 
 app.get('/', (req,res) => {
-    res.send('Welcome to backend')
+    res.send('Welcome to backend server')
 })
 
 app.listen(3000, ()=>{
