@@ -9,17 +9,20 @@ function App() {
     <div className="container">
       <h1>This is the home page</h1>
       <Switch>
-        <Route path="todo-list/:id">
+        <Route path="/" exact>
+          <Redirect to="/todo-list" />
+        </Route>
+        <Route path="/todo-list" exact>
+          <TodoList />
+        </Route>
+        <Route path="/todo-list/:id">
           <TodoDetail />
         </Route>
         <Route path="/new-todo">
           <NewTodo />
         </Route>
-        <Route path="/todo-list">
-          <TodoList />
-        </Route>
-        <Route path="/">
-          <Redirect to="/todo-list" />
+        <Route path="*">
+          <h1>Not Found</h1>
         </Route>
       </Switch>
     </div>
