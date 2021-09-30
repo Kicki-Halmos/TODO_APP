@@ -2,10 +2,11 @@ const { urlencoded } = require("express");
 const express = require("express");
 const mongoose = require("mongoose");
 const todoRoutes = require('./routes/todoRoutes');
-
+const cors = require('cors');
 const app = express();
 
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 app.use(express.json());
 app.use('/',todoRoutes);
 
