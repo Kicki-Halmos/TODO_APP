@@ -1,8 +1,8 @@
 import { Fragment } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
-import TodoList from "./Pages/TodoList";
-import TodoDetail from "./Pages/TodoDetail";
-import NewTodo from "./Pages/NewTodo";
+import TodoList from "./pages/TodoList";
+import TodoDetail from "./pages/TodoDetail";
+import NewTodo from "./pages/NewTodo";
 
 function App() {
   return (
