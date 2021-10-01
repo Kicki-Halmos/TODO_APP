@@ -6,7 +6,7 @@ import NewTodo from "./pages/NewTodo";
 
 function App() {
   return (
-    <div className="container">
+    <div className="container p-6">
       <h1>This is the home page</h1>
       <Switch>
         <Route path="/" exact>

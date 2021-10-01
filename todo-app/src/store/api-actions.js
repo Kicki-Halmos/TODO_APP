@@ -65,24 +65,22 @@ export const postTodoItem = (title, body) => {
   };
 };
 
-export const putTodoItem = (id) => {
+export const putTodoItem = (id, title, body) => {
+  
   return async (dispatch) => {
     const fetchData = async () => {
-      const response = await updateTodoItem(id);
+      const response = await updateTodoItem(id, title, body);
 
       if (response.statusText !== "OK") {
         throw new Error("Could not update todo item!");
       }
-
-      const data = response.data;
-      return data;
     };
 
     try {
       const todoItem = await fetchData();
       dispatch(
         apiActions.addTodoItem({
-          todoItem,
+          title, body
         })
       );
     } catch (error) {
@@ -109,7 +107,7 @@ export const removeTodoItem = (id) => {
         })
       );
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 };
