@@ -9,10 +9,11 @@ export const fetchTodoData = () => {
   return async (dispatch) => {
     const fetchData = async () => {
       const response = await getTodoList();
+      console.log(response);
 
-     /* if (!response.ok) {
+     if (response.statusText !== "OK") {
         throw new Error("Could not fetch todo list!");
-      }*/
+      }
       const data =  response.data;
       //console.log('data?' + data.data)
       return data;
