@@ -13,27 +13,29 @@ const TodoList = (props) => {
     dispatch(fetchTodoList());
   }, [dispatch]);
 
-  if (todoList && todoList > 0) {
-    console.log("todolist" + todoList.data);
+  if (todoList && todoList.length > 0) {
+    console.log(todoList);
   }
 
   return (
     <div className="grid grid-cols-4 gap-4">
-      <div className="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md items-start space-x-4 m-4">
-        <Link to="/new-todo">
-        <p>Click to enter a new note</p>
-        </Link>
-      </div>
+      <Link to="/new-todo">
+        <div className="p-6 max-w-md mx-auto bg-white rounded-xl shadow-md items-start space-x-4 m-4">
+          <p className="py-14 px-2 text-green-600">Click to enter a new note</p>
+        </div>
+      </Link>
+
       {!todoList || todoList.length === 0 ? (
         <p>Loading...</p>
       ) : (
-        todoList.data.map((item) => {
+        todoList.map((item) => {
           return (
             <TodoItem
               key={item._id}
               id={item._id}
               title={item.title}
               body={item.body}
+              lastEdited={item.updatedAt}
             />
           );
         })

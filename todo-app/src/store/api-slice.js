@@ -9,23 +9,25 @@ const apiSlice = createSlice({
   reducers: {
     getTodoList(state, action) {
       state.todoList = action.payload.todoList;
+      console.log(state.todoList);
     },
 
     addTodoItem(state, action) {
-      const newItem = action.payload;
+      const newItem = action.payload.todoItem;
       state.todoList.push(newItem);
     },
 
     updateTodoItem(state, action) {
       const id = action.payload.id;
       state.todoList.map((item) => {
-        return item.id === id ? action.payload : item;
+        return item._id === id ? {title: action.payload.title, body: action.payload.body} : item;
       });
     },
 
     deleteTodoItem(state, action) {
       const id = action.payload.id;
-      state.filter((item) => item.id !== id);
+      state.todoList.filter((item) => item._id !== id);
+      console.log(state.todoList);
     },
   },
 });

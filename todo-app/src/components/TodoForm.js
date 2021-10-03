@@ -15,7 +15,7 @@ const TodoForm = ({ initialValues, id, onFormSubmit, btnText }) => {
 
   const bodyChangeHandler = (event) => {
     setBody(event.target.value);
-    console.log(body);
+    
   };
 
   const formSubmitHandler = (event) => {
