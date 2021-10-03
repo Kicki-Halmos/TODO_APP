@@ -3,11 +3,15 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import TodoList from "./pages/TodoList";
 import TodoDetail from "./pages/TodoDetail";
 import NewTodo from "./pages/NewTodo";
+import Nav from './components/Nav'
 
 function App() {
   return (
+    <Fragment>
+    <Nav />
     <div className="container p-6">
-      <h1>This is the home page</h1>
+      <div className="mt-9">
+      
       <Switch>
         <Route path="/" exact>
           <Redirect to="/todo-list" />
@@ -25,7 +29,9 @@ function App() {
           <h1>Not Found</h1>
         </Route>
       </Switch>
+      </div>
     </div>
+    </Fragment>
   );
 }
 
