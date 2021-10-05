@@ -20,13 +20,16 @@ const apiSlice = createSlice({
     updateTodoItem(state, action) {
       const id = action.payload.id;
       state.todoList.map((item) => {
-        return item._id === id ? {title: action.payload.title, body: action.payload.body} : item;
+        return item._id === id
+          ? { title: action.payload.title, body: action.payload.body }
+          : item;
       });
     },
 
     deleteTodoItem(state, action) {
       const id = action.payload.id;
-      state.todoList.filter((item) => item._id !== id);
+      console.log(id);
+      state.todoList = state.todoList.filter((item) => item._id !== id);
       console.log(state.todoList);
     },
   },
@@ -34,6 +37,4 @@ const apiSlice = createSlice({
 
 export const apiActions = apiSlice.actions;
 
-export default apiSlice
-
-
+export default apiSlice;

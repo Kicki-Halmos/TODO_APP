@@ -13,7 +13,6 @@ export const fetchTodoList = () => {
   return async (dispatch) => {
     const fetchData = async () => {
       const response = await getTodoList();
-      
 
       if (response.statusText !== "OK") {
         throw new Error("Could not fetch todo list!");
@@ -68,7 +67,6 @@ export const postTodoItem = (title, body) => {
 };
 
 export const putTodoItem = (id, title, body) => {
-  
   return async (dispatch) => {
     const fetchData = async () => {
       const response = await updateTodoItem(id, title, body);
@@ -82,7 +80,9 @@ export const putTodoItem = (id, title, body) => {
       const todoItem = await fetchData();
       dispatch(
         apiActions.updateTodoItem({
-          id, title, body
+          id,
+          title,
+          body,
         })
       );
     } catch (error) {
