@@ -10,12 +10,12 @@ const getTodoList = async (req, res) => {
       if (todoList.length === 0 || !todoList) {
         return res
           .status(404)
-          .send({ success: false, error: "Todo-list not found" });
+          .json({ success: false, error: "Todo-list not found" });
       }
-      return res.status(200).send({ success: true, data: todoList });
+      return res.status(200).json({ success: true, data: todoList });
     })
     .catch((err) => {
-      return res.status(400).send({ success: false, error: err });
+      return res.status(400).json({ success: false, error: err });
     });
 };
 
@@ -27,13 +27,13 @@ const getTodoById = async (req, res) => {
       if (!todoItem) {
         return res
           .status(404)
-          .send({ success: false, error: "Todo item not found" });
+          .json({ success: false, error: "Todo item not found" });
       }
 
-      return res.status(200).send({ success: true, data: todoItem });
+      return res.status(200).json({ success: true, data: todoItem });
     })
     .catch((err) => {
-      return res.status(400).send({ success: false, error: err });
+      return res.status(400).json({ success: false, error: err });
     });
 };
 
@@ -44,7 +44,7 @@ const updateTodoItem = async (req, res) => {
   if (!body) {
     return res
       .status(400)
-      .send({ success: false, error: "You must provide a body to update" });
+      .json({ success: false, error: "You must provide a body to update" });
   }
   await Todo.findByIdAndUpdate(req.params.id, {
     title: body.title,
@@ -55,10 +55,10 @@ const updateTodoItem = async (req, res) => {
       if (!updatedItem) {
         return res
           .status(404)
-          .send({ success: false, error: "Todo item not found" });
+          .json({ success: false, error: "Todo item not found" });
       }
 
-      return res.status(200).send({
+      return res.status(200).json({
         success: true,
         id: updatedItem._id,
         message: "Todo item was updated",
@@ -66,35 +66,37 @@ const updateTodoItem = async (req, res) => {
     })
 
     .catch((err) => {
-      return res.status(400).send({ success: false, error: err });
+      return res.status(400).json({ success: false, error: err });
     });
 };
 
 const createTodo = async (req, res) => {
   // post todo item to mongoDB
   const body = req.body;
+  console.log(body.title);
   if (!body) {
     return res
       .status(400)
-      .send({ success: false, error: "You must provide a todo item" });
+      .json({ success: false, error: "You must provide a todo item" });
   }
-  const todoItem = await new Todo({ title: body.title, body: body.body });
-  if (!todoItem) {
-    return res.status(400).send({ success: false, error: err });
-  }
+  const todoItem = await new Todo({
+    title: body.title.title,
+    body: body.title.body,
+  });
 
   todoItem
     .save()
     .then(() => {
-      return res.status(200).send({
+      return res.status(200).json({
         success: true,
         id: todoItem._id,
         message: "Todo item created",
+        data: todoItem,
       });
     })
     .catch((err) => {
       console.log(err);
-      return res.status(400).send({
+      return res.status(400).json({
         err,
         message: "Todo item not created",
       });
@@ -106,8 +108,6 @@ const deleteTodoItem = async (req, res) => {
   await Todo.findOneAndDelete({ _id: req.params.id })
     .exec()
     .then((todo) => {
-      
-
       if (!todo) {
         return res
           .status(404)
@@ -115,10 +115,10 @@ const deleteTodoItem = async (req, res) => {
       }
       return res
         .status(200)
-        .send({ success: true, message: "Todo item deleted" });
+        .json({ success: true, message: "Todo item deleted" });
     })
     .catch((err) => {
-      return res.status(400).send({ success: false, error: err });
+      return res.status(400).json({ success: false, error: err });
     });
 };
 

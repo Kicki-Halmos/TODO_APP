@@ -4,14 +4,14 @@ const todoCtrl = require("../controllers/todoController");
 
 const router = express.Router();
 
-router.get("/todo-list", todoCtrl.getTodoList);
+router.get("/api/todo-list", todoCtrl.getTodoList);
 
-router.get("/todo-list/:id", todoCtrl.getTodoById);
+router.get("/api/todo-list/:id", todoCtrl.getTodoById);
 
-router.post("/todo-list", todoCtrl.createTodo);
+router.post("/api/todo-list", todoCtrl.createTodo);
 
-router.put("/todo-list/:id", todoCtrl.updateTodoItem);
+router.put("/api/todo-list/:id", todoCtrl.updateTodoItem);
 
-router.delete("/todo-list/:id", todoCtrl.deleteTodoItem);
+router.delete("/api/todo-list/:id", todoCtrl.deleteTodoItem);
 
 module.exports = router;
