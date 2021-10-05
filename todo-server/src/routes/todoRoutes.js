@@ -1,6 +1,9 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const todoCtrl = require("../controllers/todoController");
+
+const requireAuth = require('../middlewares/requireAuth');
+
+router.use(requireAuth);
 
 const router = express.Router();
 

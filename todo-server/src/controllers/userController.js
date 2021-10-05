@@ -54,15 +54,20 @@ const login = async (req, res) => {
           .json({ success: false, error: "Invalid password or email" });
       }
 
-      try{
-          await user.comparePassword(password);
-          const token = jwt.sign({userId: user._id}, 'My_boli_token');
-          res.status(200).json({success:true, data: user, token: token})
-      } catch (err){
-          return res.status(401).send({error: 'Invalid password or email'})
+      try {
+        await user.comparePassword(password);
+        const token = jwt.sign({ userId: user._id }, "My_boli_token");
+        res.status(200).json({ success: true, data: user, token: token });
+      } catch (err) {
+        return res.status(401).send({ error: "Invalid password or email" });
       }
     })
     .catch((err) => {
-        return res.status(400).json({ success: false, error: err });
-      });
+      return res.status(400).json({ success: false, error: err });
+    });
+};
+
+module.exports = {
+  signup,
+  login,
 };
