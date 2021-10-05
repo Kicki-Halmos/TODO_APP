@@ -1,26 +1,40 @@
 import { useParams, useHistory } from "react-router-dom";
-import { useRef, useState } from "react";
-import { removeTodoItem, putTodoItem } from "../store/api-actions";
+import { useRef, useState, useEffect } from "react";
+import { fetchTodoItem } from "../store/api-actions";
 import { useSelector, useDispatch } from "react-redux";
 import TodoForm from "../components/TodoForm";
+import { getTodoitem } from "../api/api";
 
 const TodoDetail = () => {
   const params = useParams();
 
   const id = params.id;
-  const todoList = useSelector((state) => state.api.todoList);
-  const item = todoList.filter((item) => item._id === id);
-  
+  const [item, setItem] = useState();
+
+  useEffect(() => {
+    async function fetchtodoItem() {
+      const response = await getTodoitem(id);
+      const todoItem = response.data;
+      setItem(todoItem.data);
+      item && console.log(item);
+    }
+
+    fetchtodoItem();
+  }, [id]);
 
   return (
-   
-      <TodoForm
-        initialValues={{ title: item[0].title, body: item[0].body }}
-        id={id}
-        onFormSubmit="Update"
-        btnText="Update"
-      />
-    
+    <div>
+      {!item ? (
+        <div>Loading...</div>
+      ) : (
+        <TodoForm
+          initialValues={{ title: item.title, body: item.body }}
+          id={id}
+          onFormSubmit="Update"
+          btnText="Update"
+        />
+      )}
+    </div>
   );
 };
 

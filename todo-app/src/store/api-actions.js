@@ -6,7 +6,7 @@ const {
   getTodoList,
   updateTodoItem,
   deleteTodoItem,
-  getTodoItem,
+  getTodoitem,
 } = api;
 
 export const fetchTodoList = () => {
@@ -18,7 +18,6 @@ export const fetchTodoList = () => {
         throw new Error("Could not fetch todo list!");
       }
       const data = response.data;
-      //console.log(data);
 
       return data;
     };
@@ -36,8 +35,27 @@ export const fetchTodoList = () => {
   };
 };
 
+export const fetchTodoItem = (id) => {
+  return async () => {
+    
+      const response = await getTodoitem(id);
+
+      if (response.statusText !== "OK") {
+        throw new Error("Could not get todo item!");
+      }
+      const todoItem = response.data;
+
+      //console.log(todoItem);
+
+      return todoItem;
+    };
+
+    
+  };
+
+
 export const postTodoItem = (title, body) => {
-  console.log(title);
+  //console.log(title);
   return async (dispatch) => {
     const fetchData = async () => {
       const response = await addTodoItem({
