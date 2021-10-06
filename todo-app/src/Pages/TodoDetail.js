@@ -1,6 +1,5 @@
 import { useParams, useHistory } from "react-router-dom";
 import { useRef, useState, useEffect } from "react";
-import { fetchTodoItem } from "../store/api-actions";
 import { useSelector, useDispatch } from "react-redux";
 import TodoForm from "../components/TodoForm";
 import { getTodoitem } from "../api/api";

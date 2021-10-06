@@ -1,19 +1,15 @@
-import { apiActions } from "./api-slice";
+import { todoActions } from "./todo-slice";
 import {
-  addTodoItem,
-  getTodoList,
-  updateTodoItem,
-  deleteTodoItem,
-  getTodoitem,
+ todoApis
 } from "../api/api";
 
-/*const {
+const {
   addTodoItem,
   getTodoList,
   updateTodoItem,
   deleteTodoItem,
   getTodoitem,
-} = api;*/
+} = todoApis;
 
 export const fetchTodoList = () => {
   return async (dispatch) => {
@@ -31,7 +27,7 @@ export const fetchTodoList = () => {
     try {
       const todoList = await fetchData();
       dispatch(
-        apiActions.getTodoList({
+        todoActions.getTodoList({
           todoList: todoList.data || [],
         })
       );
@@ -80,7 +76,7 @@ export const postTodoItem = (title, body) => {
     try {
       const todoItem = await fetchData();
       dispatch(
-        apiActions.addTodoItem({
+        todoActions.addTodoItem({
           todoItem,
         })
       );
@@ -101,9 +97,9 @@ export const putTodoItem = (id, title, body) => {
     };
 
     try {
-      const todoItem = await fetchData();
+      await fetchData();
       dispatch(
-        apiActions.updateTodoItem({
+        todoActions.updateTodoItem({
           id,
           title,
           body,
@@ -128,7 +124,7 @@ export const removeTodoItem = (id) => {
     try {
       await fetchData();
       dispatch(
-        apiActions.deleteTodoItem({
+        todoActions.deleteTodoItem({
           id,
         })
       );

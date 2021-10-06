@@ -1,7 +1,7 @@
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useRef, useState } from "react";
-import { putTodoItem, postTodoItem } from "../store/api-actions";
+import { putTodoItem, postTodoItem } from "../store/todo-actions";
 
 const TodoForm = ({ initialValues, id, onFormSubmit, btnText }) => {
   const [title, setTitle] = useState(initialValues.title);

@@ -1,20 +1,20 @@
 import { useEffect, Fragment } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchTodoList } from "../store/api-actions";
+import { fetchTodoList } from "../store/todo-actions";
 import TodoDetail from "./TodoDetail";
 import TodoItem from "../components/TodoItem";
 
 const TodoList = (props) => {
   const dispatch = useDispatch();
-  const todoList = useSelector((state) => state.api.todoList);
+  const todoList = useSelector((state) => state.todo.todoList);
 
   useEffect(() => {
     dispatch(fetchTodoList());
   }, [dispatch]);
 
   if (todoList && todoList.length > 0) {
-    console.log(todoList);
+    //console.log(todoList);
   }
 
   return (

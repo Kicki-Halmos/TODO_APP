@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const apiSlice = createSlice({
-  name: "api",
+const todoSlice = createSlice({
+  name: "todo",
   initialState: {
     todoList: [],
   },
@@ -18,7 +18,9 @@ const apiSlice = createSlice({
     },
 
     updateTodoItem(state, action) {
+      console.log('hej');
       const id = action.payload.id;
+      console.log(action.payload);
       state.todoList.map((item) => {
         return item._id === id
           ? { title: action.payload.title, body: action.payload.body }
@@ -28,6 +30,7 @@ const apiSlice = createSlice({
 
     deleteTodoItem(state, action) {
       const id = action.payload.id;
+      console.log(action.payload);
       console.log(id);
       state.todoList = state.todoList.filter((item) => item._id !== id);
       console.log(state.todoList);
@@ -35,6 +38,6 @@ const apiSlice = createSlice({
   },
 });
 
-export const apiActions = apiSlice.actions;
+export const todoActions = todoSlice.actions;
 
-export default apiSlice;
+export default todoSlice;

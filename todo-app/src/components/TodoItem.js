@@ -1,6 +1,6 @@
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { removeTodoItem } from "../store/api-actions";
+import { removeTodoItem } from "../store/todo-actions";
 
 const TodoItem = (props) => {
   //här ska state för markdown kod in, props.body
