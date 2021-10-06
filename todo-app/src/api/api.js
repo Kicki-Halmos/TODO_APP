@@ -10,12 +10,26 @@ export const updateTodoItem = (id, title, body) => api.put(`/api/todo-list/${id}
 export const deleteTodoItem = (id) => api.delete(`/api/todo-list/${id}`);
 export const getTodoitem = (id) => api.get(`/api/todo-list/${id}`);
 
-const apis = {
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("token");
+    if(token){
+      config.headers.Authorization = `Bearer ${token}`
+    }
+    return config
+
+},
+
+(err) => {
+  return Promise.reject(err);
+})
+
+/*const apis = {
   addTodoItem,
   getTodoList,
   updateTodoItem,
   deleteTodoItem,
   getTodoitem,
-};
+};*/
 
-export default apis;
+export default api;

@@ -1,13 +1,19 @@
 import { apiActions } from "./api-slice";
-import api from "../api/api";
-
-const {
+import {
   addTodoItem,
   getTodoList,
   updateTodoItem,
   deleteTodoItem,
   getTodoitem,
-} = api;
+} from "../api/api";
+
+/*const {
+  addTodoItem,
+  getTodoList,
+  updateTodoItem,
+  deleteTodoItem,
+  getTodoitem,
+} = api;*/
 
 export const fetchTodoList = () => {
   return async (dispatch) => {

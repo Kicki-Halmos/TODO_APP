@@ -16,7 +16,7 @@ const TodoDetail = () => {
       const response = await getTodoitem(id);
       const todoItem = response.data;
       setItem(todoItem.data);
-      item && console.log(item);
+      
     }
 
     fetchtodoItem();
