@@ -29,7 +29,7 @@ const TodoList = (props) => {
         </div>
       </Link>
 
-      {!todoList || todoList.length === 0 ? (
+      {!todoList ? (
         <p>Loading...</p>
       ) : (
         todoList.map((item) => {

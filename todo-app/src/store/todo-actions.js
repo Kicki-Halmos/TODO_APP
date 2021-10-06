@@ -79,9 +79,10 @@ export const postTodoItem = (title, body) => {
         })
       );
     } catch (error) {
+      console.log(error.response);
       dispatch(
         todoActions.addErrorMessage({
-          errorMessage: error.response.data.error,
+          errorMessage: error,
         })
       );
     }

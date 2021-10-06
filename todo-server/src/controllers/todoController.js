@@ -73,7 +73,7 @@ const updateTodoItem = async (req, res) => {
 const createTodo = async (req, res) => {
   // post todo item to mongoDB
   const body = req.body;
-  console.log(body.title);
+  //console.log(body.title);
   if (!body) {
     return res
       .status(400)
@@ -82,6 +82,7 @@ const createTodo = async (req, res) => {
   const todoItem = await new Todo({
     title: body.title.title,
     body: body.title.body,
+    userId: req.user._id
   });
 
   todoItem
@@ -97,7 +98,7 @@ const createTodo = async (req, res) => {
     .catch((err) => {
       console.log(err);
       return res.status(400).json({
-        err,
+        error: err,
         message: "Todo item not created",
       });
     });

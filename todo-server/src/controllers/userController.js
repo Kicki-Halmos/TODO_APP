@@ -19,20 +19,21 @@ const signup = async (req, res) => {
 
   user
     .save()
-    .then(() => {
+    .then((user) => {
       const token = jwt.sign({ userId: user._id }, "My_boli_token");
       return res.status(200).json({
         success: true,
         id: user._id,
         message: "User created",
-        data: User,
+        data: {token}
+        
       });
     })
     .catch((err) => {
       console.log(err);
       return res.status(400).json({
         success: false,
-        message: "User not created",
+        error: "User not created",
       });
     });
 };
@@ -58,12 +59,13 @@ const login = async (req, res) => {
       try {
         user.comparePassword(password);
         const token = jwt.sign({ userId: user._id }, "My_boli_token");
-        res.status(200).json({ success: true, data: user, token: token });
+        res.status(200).json({ success: true, data: {token} });
       } catch (err) {
-        return res.status(401).send({ error: "Invalid password or email" });
+        return res.status(401).json({ error: "Invalid password or email" });
       }
     })
     .catch((err) => {
+      console.log(err);
       return res.status(400).json({ success: false, error: err });
     });
 };
