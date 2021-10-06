@@ -1,7 +1,21 @@
 import { userActions } from "./user-slice";
 import { userApis } from "../api/api";
+import history from "../utils/history";
 
 const { signup, login } = userApis;
+
+export const tryLocalLogin = () => (dispatch) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    dispatch(
+      userActions.login({
+        token,
+      })
+    );
+  } else {
+    history.push("/login");
+  }
+};
 
 export const postSignup = (email, password) => {
   return async (dispatch) => {
@@ -25,10 +39,11 @@ export const postSignup = (email, password) => {
           token: user.data.token,
         })
       );
+      history.push("/");
     } catch (error) {
       dispatch(
         userActions.addError({
-          errorMessage: error,
+          errorMessage: error.response.data.error,
         })
       );
     }
@@ -36,6 +51,7 @@ export const postSignup = (email, password) => {
 };
 
 export const postLogin = (email, password) => {
+  console.log(email, password);
   return async (dispatch) => {
     const fetchData = async () => {
       const response = await login(email, password);
@@ -57,10 +73,12 @@ export const postLogin = (email, password) => {
           token: user.data.token,
         })
       );
+      history.push("/");
     } catch (error) {
+      console.log(error.response)
       dispatch(
         userActions.addError({
-          errorMessage: error,
+          errorMessage: error.response.data.error,
         })
       );
     }

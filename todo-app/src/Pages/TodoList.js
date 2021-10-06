@@ -1,13 +1,17 @@
-import { useEffect, Fragment } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchTodoList } from "../store/todo-actions";
-import TodoDetail from "./TodoDetail";
+import { tryLocalLogin } from "../store/user-actions";
 import TodoItem from "../components/TodoItem";
 
 const TodoList = (props) => {
   const dispatch = useDispatch();
   const todoList = useSelector((state) => state.todo.todoList);
+
+  useEffect(()=>{
+    dispatch(tryLocalLogin());
+  },[dispatch])
 
   useEffect(() => {
     dispatch(fetchTodoList());

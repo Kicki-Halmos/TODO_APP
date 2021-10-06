@@ -11,9 +11,9 @@ export const updateTodoItem = (id, title, body) => api.put(`/api/todo-list/${id}
 export const deleteTodoItem = (id) => api.delete(`/api/todo-list/${id}`);
 export const getTodoitem = (id) => api.get(`/api/todo-list/${id}`);
 
-export const signup = (email, password) => api.post("signup", { email, password });
+export const signup = (email, password) => api.post("/api/signup", { email, password });
 
-export const login = (email, password) => api.post("login", { email, password });
+export const login = (email, password) => api.post("/api/login", { email, password });
 
 
 api.interceptors.request.use(

@@ -1,7 +1,5 @@
 import { todoActions } from "./todo-slice";
-import {
- todoApis
-} from "../api/api";
+import { todoApis } from "../api/api";
 
 const {
   addTodoItem,
@@ -32,29 +30,29 @@ export const fetchTodoList = () => {
         })
       );
     } catch (error) {
-      console.log(error);
+      dispatch(
+        todoActions.addErrorMessage({
+          errorMessage: error.response.data.error,
+        })
+      );
     }
   };
 };
 
 export const fetchTodoItem = (id) => {
   return async () => {
-    
-      const response = await getTodoitem(id);
+    const response = await getTodoitem(id);
 
-      if (response.statusText !== "OK") {
-        throw new Error("Could not get todo item!");
-      }
-      const todoItem = response.data;
+    if (response.statusText !== "OK") {
+      throw new Error("Could not get todo item!");
+    }
+    const todoItem = response.data;
 
-      //console.log(todoItem);
+    //console.log(todoItem);
 
-      return todoItem;
-    };
-
-    
+    return todoItem;
   };
-
+};
 
 export const postTodoItem = (title, body) => {
   //console.log(title);
@@ -81,7 +79,11 @@ export const postTodoItem = (title, body) => {
         })
       );
     } catch (error) {
-      console.log(error);
+      dispatch(
+        todoActions.addErrorMessage({
+          errorMessage: error.response.data.error,
+        })
+      );
     }
   };
 };
@@ -106,7 +108,11 @@ export const putTodoItem = (id, title, body) => {
         })
       );
     } catch (error) {
-      console.log(error);
+      dispatch(
+        todoActions.addErrorMessage({
+          errorMessage: error.response.data.error,
+        })
+      );
     }
   };
 };
@@ -129,7 +135,11 @@ export const removeTodoItem = (id) => {
         })
       );
     } catch (error) {
-      console.log(error);
+      dispatch(
+        todoActions.addErrorMessage({
+          errorMessage: error.response.data.error,
+        })
+      );
     }
   };
 };
