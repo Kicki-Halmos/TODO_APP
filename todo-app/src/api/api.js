@@ -38,4 +38,8 @@ export const todoApis = {
   getTodoitem,
 };
 
+export const userApis = {
+  signup, login
+}
+
 export default api;

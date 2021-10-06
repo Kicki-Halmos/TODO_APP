@@ -7,6 +7,10 @@ const userSlice = createSlice({
         errorMessage: ""
     }, 
     reducers: {
+        signup(state, action){
+            state.token = action.payload.token;
+            state.errorMessage = "";
+        },
         login(state, action) {
             state.token = action.payload.token;
             state.errorMessage="";
