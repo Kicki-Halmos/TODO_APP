@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+const User = require('./User')
 
 const todoSchema = new mongoose.Schema(
   {
@@ -7,10 +7,10 @@ const todoSchema = new mongoose.Schema(
     body: { type: String, required: true },
     userId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
-  }
+      ref: User,
+    },
   },
-  {timestamps: true},
+  { timestamps: true }
 );
 
-module.exports = mongoose.model("Todo", todoSchema);
+mongoose.model("Todo", todoSchema);

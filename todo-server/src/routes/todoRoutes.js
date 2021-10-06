@@ -3,18 +3,17 @@ const todoCtrl = require("../controllers/todoController");
 
 const requireAuth = require('../middlewares/requireAuth');
 
-router.use(requireAuth);
-
 const router = express.Router();
+//router.use(requireAuth);
 
-router.get("/api/todo-list", todoCtrl.getTodoList);
+router.get("/api/todo-list", requireAuth, todoCtrl.getTodoList);
 
-router.get("/api/todo-list/:id", todoCtrl.getTodoById);
+router.get("/api/todo-list/:id", requireAuth, todoCtrl.getTodoById);
 
-router.post("/api/todo-list", todoCtrl.createTodo);
+router.post("/api/todo-list", requireAuth, todoCtrl.createTodo);
 
-router.put("/api/todo-list/:id", todoCtrl.updateTodoItem);
+router.put("/api/todo-list/:id", requireAuth, todoCtrl.updateTodoItem);
 
-router.delete("/api/todo-list/:id", todoCtrl.deleteTodoItem);
+router.delete("/api/todo-list/:id", requireAuth, todoCtrl.deleteTodoItem);
 
 module.exports = router;

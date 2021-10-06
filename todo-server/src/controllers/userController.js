@@ -1,14 +1,15 @@
 const mongoose = require("mongoose");
-const jwt = mongoose.model("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 
 const signup = async (req, res) => {
   const { email, password } = req.body;
+  console.log(password);
 
   if (!email || !password) {
     return res
       .status(400)
-      .jsont({ success: false, error: "You must provied email and password" });
+      .json({ success: false, error: "You must provide email and password" });
   }
 
   const user = await new User({
@@ -42,7 +43,7 @@ const login = async (req, res) => {
   if (!email || !password) {
     return res
       .status(400)
-      .jsont({ success: false, error: "You must provied email and password" });
+      .json({ success: false, error: "You must provied email and password" });
   }
 
   await User.findOne({ email })
@@ -55,7 +56,7 @@ const login = async (req, res) => {
       }
 
       try {
-        await user.comparePassword(password);
+        user.comparePassword(password);
         const token = jwt.sign({ userId: user._id }, "My_boli_token");
         res.status(200).json({ success: true, data: user, token: token });
       } catch (err) {

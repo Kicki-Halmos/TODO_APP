@@ -1,6 +1,7 @@
 const { urlencoded } = require("express");
 const express = require("express");
 const mongoose = require("mongoose");
+
 const todoRoutes = require("./routes/todoRoutes");
 const userRoutes = require("./routes/userRoutes");
 const requireAuth = require("./middlewares/requireAuth");
@@ -29,8 +30,8 @@ mongoose.connection.on("error", (err) => {
   console.log("Error connecting to mongo", err);
 });
 
-app.get("/", requireAuth, (req, res) => {
-  res.send(`Your email: ${req.user.email}`);
+app.get("/", (req, res) => {
+  res.send('Welcome to backend');
 });
 
 app.listen(3000, () => {
