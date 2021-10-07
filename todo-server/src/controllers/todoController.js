@@ -4,7 +4,7 @@ const Todo = require("../models/Todo");
 
 const getTodoList = async (req, res) => {
   // get todolist from mongodb
-  await Todo.find({})
+  await Todo.find({userId: req.user._id})
     .exec()
     .then((todoList) => {
       if (todoList.length === 0 || !todoList) {
