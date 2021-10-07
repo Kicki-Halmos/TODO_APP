@@ -5,6 +5,7 @@ import TodoList from "./pages/TodoList";
 import TodoDetail from "./pages/TodoDetail";
 import NewTodo from "./pages/NewTodo";
 import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 import { useSelector } from "react-redux";
 import Nav from "./components/Nav";
 
@@ -32,8 +33,8 @@ function App() {
             <Route path="/login">
               <Login/>
             </Route>
-            <Route path="/signin">
-              <Login/>
+            <Route path="/signup">
+              <Signup/>
             </Route>
             <Route path="*">
               <h1>Not Found</h1>

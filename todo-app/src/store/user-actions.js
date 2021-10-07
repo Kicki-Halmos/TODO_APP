@@ -85,6 +85,14 @@ export const postLogin = (email, password) => {
   };
 };
 
+export const logout = () => {
+  return (dispatch) => {
+    dispatch(userActions.logout())
+    localStorage.removeItem("token");
+    history.push('/login');
+  }
+}
+
 export const clearErrorMessage = () => {
   return (dispatch) => {
     dispatch(userActions.clearErrorMessage());

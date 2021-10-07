@@ -1,15 +1,19 @@
 import { useSelector } from "react-redux";
 import AuthForm from "../components/AuthForm"
 
-const Signin = () => {
+const Signup = () => {
     const errorMessage = useSelector((state)=> state.todo.errorMessage);
     console.log(errorMessage)
     return (
         <div>
     {errorMessage !== "" && <p>{errorMessage}</p>}
-    <AuthForm />
+    <AuthForm 
+    btnText="Signup"
+    linkText="Already have an account? Login!"
+    linkTo="/login"
+    />
     </div>
     )
 }
 
-export default Signin;
+export default Signup;

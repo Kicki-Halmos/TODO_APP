@@ -10,7 +10,7 @@ const todoSlice = createSlice({
   reducers: {
     getTodoList(state, action) {
       state.todoList = action.payload.todoList;
-      console.log(state.errorMessage);
+      
     },
 
     addTodoItem(state, action) {

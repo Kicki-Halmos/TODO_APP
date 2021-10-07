@@ -11,7 +11,7 @@ const Login = () => {
         btnText="Login"
         linkText="Don't have an account? Signup!"
         linkTo="/signup"
-        onFormSubmit="login"
+        
       />
     </div>
   );

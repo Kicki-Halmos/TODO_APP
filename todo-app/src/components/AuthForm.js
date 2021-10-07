@@ -1,13 +1,14 @@
-import { useHistory, Link } from "react-router-dom";
+import {  Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { postLogin, postSignup } from "../store/user-actions";
 
-const AuthForm = ({btnText, linkText, linkTo, onFormSubmit}) => {
+
+const AuthForm = ({btnText, linkText, linkTo, }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const history = useHistory();
+  
 
   const emailChangeHandler = (event) => {
     setEmail(event.target.value);
@@ -19,12 +20,13 @@ const AuthForm = ({btnText, linkText, linkTo, onFormSubmit}) => {
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
-    if (onFormSubmit === "login") {
+    console.log(linkTo);
+    if (linkTo === "/signup") {
       dispatch(postLogin(email, password));
     } else {
       dispatch(postSignup(email, password));
     }
-    //history.push("/");
+    
   };
 
   return (
