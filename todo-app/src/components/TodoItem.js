@@ -1,6 +1,7 @@
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { removeTodoItem } from "../store/todo-actions";
+import MDEditor from '@uiw/react-md-editor';
 
 const TodoItem = (props) => {
   //här ska state för markdown kod in, props.body
@@ -18,7 +19,7 @@ const TodoItem = (props) => {
     <div className="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md items-start space-x-4 m-4">
       <Link to={`/todo-list/${props.id}`}>
         <p className="text-md font-semibold mb-2">{props.title}</p>
-        <p className="text-sm">{props.body}</p>
+        <MDEditor.Markdown source={props.body} className="text-sm" />
         <p className="text-sm mt-4 text-gray-500">last edited: {lastEdited}</p>
       </Link>
       <button

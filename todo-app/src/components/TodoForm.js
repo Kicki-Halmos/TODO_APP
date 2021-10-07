@@ -1,13 +1,24 @@
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import {  useState } from "react";
+import {  useState, useRef } from "react";
 import { putTodoItem, postTodoItem } from "../store/todo-actions";
+import MDEditor from '@uiw/react-md-editor';
 
 const TodoForm = ({ initialValues, id, onFormSubmit, btnText }) => {
   const [title, setTitle] = useState(initialValues.title);
   const [body, setBody] = useState(initialValues.body);
+
+  console.log(body);
+
+  const titleInput = useRef();
+  const bodyInput = useRef()
+
+ 
+
+  //const [markDownBody, setMarkDownBody] = useState("");
   const history = useHistory();
   const dispatch = useDispatch();
+ 
 
   const titleChangeHandler = (event) => {
     setTitle(event.target.value);
@@ -15,16 +26,42 @@ const TodoForm = ({ initialValues, id, onFormSubmit, btnText }) => {
 
   const bodyChangeHandler = (event) => {
     setBody(event.target.value);
+    /*const splitContent = body.split("\n");
+    const markDown = splitContent.map((item) =>  {
+        return ('* ' + item);
+    })
     
+    let newString = "" 
+    
+    splitContent.forEach(item => {
+      newString += ('* ' + item + '\n');
+    })
+
+    console.log(newString);
+    //console.log(markDown);
+   setMarkDownBody(newString);
+    */
   };
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
+
+    const titleFinal = titleInput.current.value;
+    const splitContent = bodyInput.current.value.split("\n");
+    let markDownBody = "";
+
+    splitContent.forEach(item => {
+      markDownBody += ('* ' + item + '\n');
+    })
+
+  
+    console.log(markDownBody);
+
     if (onFormSubmit === "Update") {
-      dispatch(putTodoItem(id, title, body));
+      dispatch(putTodoItem(id, titleFinal, markDownBody));
     }
     else{
-      dispatch(postTodoItem(title, body))
+      dispatch(postTodoItem(titleFinal, markDownBody))
     }
     history.push("/todo-list");
   };
@@ -38,13 +75,13 @@ const TodoForm = ({ initialValues, id, onFormSubmit, btnText }) => {
         id="title"
         value={title}
         onChange={titleChangeHandler}
-        //ref={titleInput}
+        ref={titleInput}
       />
       <textarea
         name="body"
         id="body"
         onChange={bodyChangeHandler}
-        //ref={bodyInput}
+        ref={bodyInput}
         className="m-2 p-2 border-2 rounded-lg"
         value={body}
       ></textarea>
