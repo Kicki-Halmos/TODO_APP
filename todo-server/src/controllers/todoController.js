@@ -7,7 +7,7 @@ const getTodoList = async (req, res) => {
   await Todo.find({userId: req.user._id})
     .exec()
     .then((todoList) => {
-      if (todoList.length === 0 || !todoList) {
+      if (!todoList) {
         return res
           .status(404)
           .json({ success: false, error: "Todo-list not found" });
