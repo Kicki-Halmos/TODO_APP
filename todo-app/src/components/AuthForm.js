@@ -14,11 +14,11 @@ const AuthForm = ({ btnText, linkText, linkTo }) => {
   }
 
   const emailChangeHandler = (event) => {
-    setEmail(event.target.value);
+    setEmail(event.target.value.trim());
   };
 
   const passwordChangeHandler = (event) => {
-    setPassword(event.target.value);
+    setPassword(event.target.value.trim());
   };
 
   const formSubmitHandler = (event) => {
@@ -63,12 +63,12 @@ const AuthForm = ({ btnText, linkText, linkTo }) => {
           />
        
         <input
-          className="py-2 px-4 m-2 font-semibold rounded-lg shadow-md text-white bg-green-500 hover:bg-green-700"
+          className="py-2 px-4 m-2 font-semibold rounded-lg shadow-md text-white bg-green-500 hover:bg-green-700 cursor-pointer"
           type="submit"
           value={btnText}
         />
         <Link to={linkTo}>
-          <button onClick={clearError}className="text-green-600 text-bold pl-4">{linkText}</button>
+          <button onClick={clearError}className="text-green-600 text-bold pl-3">{linkText}</button>
         </Link>
         </div>
       </form>

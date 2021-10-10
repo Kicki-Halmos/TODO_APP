@@ -1,27 +1,27 @@
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { removeTodoItem } from "../store/todo-actions";
-import MDEditor from '@uiw/react-md-editor';
+import MDEditor from "@uiw/react-md-editor";
 
 const TodoItem = (props) => {
-  
-  
   const dispatch = useDispatch();
 
   const lastEdited = props.lastEdited.slice(0, 10);
 
   const deleteItem = () => {
     dispatch(removeTodoItem(props.id));
-   
   };
 
   return (
-    <div className="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md items-start space-x-4 m-4">
+    <div>
+    <div className="p-6 max-w-sm mx-auto bg-white rounded-xl shadow-md items-start space-x-4 m-4 flex flex-col justify-between">
       <Link to={`/todo-list/${props.id}`}>
         <p className="text-md font-semibold mb-2">{props.title}</p>
         <MDEditor.Markdown source={props.body} className="text-sm" />
-        <p className="text-sm mt-4 text-gray-500">last edited: {lastEdited}</p>
+       
       </Link>
+      <div>
+      <p className="text-sm mt-4 text-gray-500">last edited: {lastEdited}</p>
       <button
         className="py-2 px-8 mt-2 font-semibold rounded-lg shadow-md text-white bg-green-500 hover:bg-green-700"
         type="button"
@@ -29,6 +29,8 @@ const TodoItem = (props) => {
       >
         Delete
       </button>
+      </div>
+    </div>
     </div>
   );
 };

@@ -28,8 +28,8 @@ const TodoForm = ({ initialValues, id, onFormSubmit, btnText }) => {
   const formSubmitHandler = (event) => {
     event.preventDefault();
 
-    const titleFinal = titleInput.current.value;
-    const splitContent = bodyInput.current.value.split("\n");
+    const titleFinal = titleInput.current.value.trim();
+    const splitContent = bodyInput.current.value.trim().split("\n");
     let markDownBody = "";
 
     splitContent.forEach(item => {
@@ -69,7 +69,7 @@ const TodoForm = ({ initialValues, id, onFormSubmit, btnText }) => {
       ></textarea>
 
       <input
-        className="py-2 px-4 m-2 font-semibold rounded-lg shadow-md text-white bg-green-500 hover:bg-green-700"
+        className="py-2 px-4 m-2 font-semibold rounded-lg shadow-md text-white bg-green-500 hover:bg-green-700 cursor-pointer"
         type="submit"
         value={btnText}
       />
