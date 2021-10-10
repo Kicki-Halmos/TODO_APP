@@ -8,14 +8,10 @@ const TodoForm = ({ initialValues, id, onFormSubmit, btnText }) => {
   const [title, setTitle] = useState(initialValues.title);
   const [body, setBody] = useState(initialValues.body);
 
-  console.log(body);
-
   const titleInput = useRef();
   const bodyInput = useRef()
 
- 
 
-  //const [markDownBody, setMarkDownBody] = useState("");
   const history = useHistory();
   const dispatch = useDispatch();
  
@@ -26,21 +22,7 @@ const TodoForm = ({ initialValues, id, onFormSubmit, btnText }) => {
 
   const bodyChangeHandler = (event) => {
     setBody(event.target.value);
-    /*const splitContent = body.split("\n");
-    const markDown = splitContent.map((item) =>  {
-        return ('* ' + item);
-    })
     
-    let newString = "" 
-    
-    splitContent.forEach(item => {
-      newString += ('* ' + item + '\n');
-    })
-
-    console.log(newString);
-    //console.log(markDown);
-   setMarkDownBody(newString);
-    */
   };
 
   const formSubmitHandler = (event) => {

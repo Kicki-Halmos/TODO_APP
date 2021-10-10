@@ -6,11 +6,9 @@ import TodoDetail from "./pages/TodoDetail";
 import NewTodo from "./pages/NewTodo";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import { useSelector } from "react-redux";
 import Nav from "./components/Nav";
 
 function App() {
-  const token = useSelector((state) => state.user.token)
   return (
     <Fragment>
       <Nav />

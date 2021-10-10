@@ -42,7 +42,7 @@ export const postSignup = (email, password) => {
       history.push("/");
     } catch (error) {
       dispatch(
-        userActions.addError({
+        userActions.addErrorMessage({
           errorMessage: error.response.data.error,
         })
       );
@@ -77,7 +77,7 @@ export const postLogin = (email, password) => {
     } catch (error) {
       console.log(error.response)
       dispatch(
-        userActions.addError({
+        userActions.addErrorMessage({
           errorMessage: error.response.data.error,
         })
       );

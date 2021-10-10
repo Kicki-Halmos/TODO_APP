@@ -4,15 +4,15 @@ import { removeTodoItem } from "../store/todo-actions";
 import MDEditor from '@uiw/react-md-editor';
 
 const TodoItem = (props) => {
-  //här ska state för markdown kod in, props.body
-  const history = useHistory();
+  
+  
   const dispatch = useDispatch();
 
   const lastEdited = props.lastEdited.slice(0, 10);
 
   const deleteItem = () => {
     dispatch(removeTodoItem(props.id));
-    //history.push("/todo-list");
+   
   };
 
   return (

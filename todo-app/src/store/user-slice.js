@@ -19,7 +19,7 @@ const userSlice = createSlice({
             state.token = null;
             state.errorMessage = "";
         },
-        addError(state, action){
+        addErrorMessage(state, action){
             state.errorMessage = action.payload.errorMessage;
         },
         clearErrorMessage(state, action){

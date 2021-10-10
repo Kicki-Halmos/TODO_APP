@@ -4,13 +4,11 @@ const todoSlice = createSlice({
   name: "todo",
   initialState: {
     todoList: [],
-    errorMessage: ""
   },
 
   reducers: {
     getTodoList(state, action) {
       state.todoList = action.payload.todoList;
-      
     },
 
     addTodoItem(state, action) {
@@ -19,7 +17,7 @@ const todoSlice = createSlice({
     },
 
     updateTodoItem(state, action) {
-      console.log('hej');
+      console.log("hej");
       const id = action.payload.id;
       console.log(action.payload);
       state.todoList.map((item) => {
@@ -36,10 +34,6 @@ const todoSlice = createSlice({
       state.todoList = state.todoList.filter((item) => item._id !== id);
       console.log(state.todoList);
     },
-    addErrorMessage(state, action) {
-      state.errorMessage = action.payload.errorMessage;
-      console.log(state.errorMessage);
-    }
   },
 });
 
