@@ -1,5 +1,8 @@
-const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
+/* eslint-disable prefer-promise-reject-errors */
+/* eslint-disable no-shadow */
+/* eslint-disable consistent-return */
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
   email: {
@@ -13,9 +16,9 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-userSchema.pre("save", function (next) {
+userSchema.pre('save', function (next) {
   const user = this;
-  if (!user.isModified("password")) {
+  if (!user.isModified('password')) {
     return next();
   }
 
@@ -30,7 +33,7 @@ userSchema.pre("save", function (next) {
       }
 
       user.password = hash;
-      next();
+      return next();
     });
   });
 });
@@ -51,4 +54,4 @@ userSchema.methods.comparePassword = function (candidatePassword) {
   });
 };
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model('User', userSchema);

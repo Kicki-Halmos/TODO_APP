@@ -1,7 +1,9 @@
-const mongoose = require("mongoose");
-const jwt = require("jsonwebtoken");
-const User = require("../models/User");
-const validator = require("validator");
+/* eslint-disable consistent-return */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-shadow */
+const jwt = require('jsonwebtoken');
+const validator = require('validator');
+const User = require('../models/User');
 
 const signup = async (req, res) => {
   const { email, password } = req.body;
@@ -9,48 +11,48 @@ const signup = async (req, res) => {
   if (!email || !password) {
     return res
       .status(400)
-      .json({ success: false, error: "You must provide email and password" });
+      .json({ success: false, error: 'You must provide email and password' });
   }
 
   const sanitizeEmail = validator.escape(email);
   const sanitizePassword = validator.escape(password);
 
-  console.log(sanitizePassword)
+  console.log(sanitizePassword);
 
   if (!validator.isEmail(sanitizeEmail)) {
     return res
       .status(400)
-      .json({ success: false, error: "You must provide a valid email" });
+      .json({ success: false, error: 'You must provide a valid email' });
   }
 
-  if(sanitizePassword.length < 6){
+  if (sanitizePassword.length < 6) {
     return res
-    .status(400)
-    .json({success: false, error: "Password must be at least 6 characters"});
+      .status(400)
+      .json({ success: false, error: 'Password must be at least 6 characters' });
   }
 
   const isUser = await User.findOne({ email: sanitizeEmail });
-  //console.log(isUser);
+  // console.log(isUser);
 
   if (isUser) {
     return res
       .status(403)
-      .json({ success: false, error: "Email already exists" });
+      .json({ success: false, error: 'Email already exists' });
   }
 
   const user = await new User({
-    email:sanitizeEmail,
+    email: sanitizeEmail,
     password: sanitizePassword,
   });
 
   user
     .save()
     .then((user) => {
-      const token = jwt.sign({ userId: user._id }, "My_boli_token");
+      const token = jwt.sign({ userId: user._id }, 'My_boli_token');
       return res.status(200).json({
         success: true,
         id: user._id,
-        message: "User created",
+        message: 'User created',
         data: { token },
       });
     })
@@ -58,7 +60,7 @@ const signup = async (req, res) => {
       console.log(err);
       return res.status(400).json({
         success: false,
-        error: "User not created",
+        error: 'User not created',
       });
     });
 };
@@ -69,7 +71,7 @@ const login = async (req, res) => {
   if (!email || !password) {
     return res
       .status(400)
-      .json({ success: false, error: "You must provied email and password" });
+      .json({ success: false, error: 'You must provied email and password' });
   }
 
   await User.findOne({ email })
@@ -78,15 +80,15 @@ const login = async (req, res) => {
       if (!user) {
         return res
           .status(401)
-          .json({ success: false, error: "Invalid password or email" });
+          .json({ success: false, error: 'Invalid password or email' });
       }
 
       try {
         user.comparePassword(password);
-        const token = jwt.sign({ userId: user._id }, "My_boli_token");
+        const token = jwt.sign({ userId: user._id }, 'My_boli_token');
         res.status(200).json({ success: true, data: { token } });
       } catch (err) {
-        return res.status(401).json({ error: "Invalid password or email" });
+        return res.status(401).json({ error: 'Invalid password or email' });
       }
     })
     .catch((err) => {

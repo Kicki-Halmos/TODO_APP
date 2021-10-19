@@ -1,24 +1,24 @@
-import { useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { fetchTodoList } from "../store/todo-actions";
-import { tryLocalLogin } from "../store/user-actions";
-import TodoItem from "../components/TodoItem";
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchTodoList } from '../store/todo-actions';
+import { tryLocalLogin } from '../store/user-actions';
+import TodoItem from '../components/TodoItem';
 
-const TodoList = (props) => {
+const TodoList = () => {
   const dispatch = useDispatch();
   const todoList = useSelector((state) => state.todo.todoList);
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(tryLocalLogin());
-  },[dispatch])
+  }, [dispatch]);
 
   useEffect(() => {
     dispatch(fetchTodoList());
   }, [dispatch]);
 
   if (todoList && todoList.length > 0) {
-    //console.log(todoList);
+    // console.log(todoList);
   }
 
   return (
@@ -32,17 +32,15 @@ const TodoList = (props) => {
       {!todoList ? (
         <p>Loading...</p>
       ) : (
-        todoList.map((item) => {
-          return (
-            <TodoItem
-              key={item._id}
-              id={item._id}
-              title={item.title}
-              body={item.body}
-              lastEdited={item.updatedAt}
-            />
-          );
-        })
+        todoList.map((item) => (
+          <TodoItem
+            key={item._id}
+            id={item._id}
+            title={item.title}
+            body={item.body}
+            lastEdited={item.updatedAt}
+          />
+        ))
       )}
     </div>
   );

@@ -1,7 +1,9 @@
-import { createSlice } from "@reduxjs/toolkit";
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-param-reassign */
+import { createSlice } from '@reduxjs/toolkit';
 
 const todoSlice = createSlice({
-  name: "todo",
+  name: 'todo',
   initialState: {
     todoList: [],
   },
@@ -17,18 +19,16 @@ const todoSlice = createSlice({
     },
 
     updateTodoItem(state, action) {
-      console.log("hej");
-      const id = action.payload.id;
+      console.log('hej');
+      const { id } = action.payload;
       console.log(action.payload);
-      state.todoList.map((item) => {
-        return item._id === id
-          ? { title: action.payload.title, body: action.payload.body }
-          : item;
-      });
+      state.todoList.map((item) => (item._id === id
+        ? { title: action.payload.title, body: action.payload.body }
+        : item));
     },
 
     deleteTodoItem(state, action) {
-      const id = action.payload.id;
+      const { id } = action.payload;
       console.log(action.payload);
       console.log(id);
       state.todoList = state.todoList.filter((item) => item._id !== id);
