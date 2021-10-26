@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
-
 const cors = require('cors');
+const dotenv = require('dotenv');
 const todoRoutes = require('./routes/todoRoutes');
 const userRoutes = require('./routes/userRoutes');
 
@@ -13,20 +13,16 @@ app.use(express.json());
 app.use(todoRoutes);
 app.use(userRoutes);
 
-const mongoUri = 'mongodb+srv://kicki:admin@cluster0.dca84.mongodb.net/todoDB?retryWrites=true&w=majority';
-mongoose.connect(mongoUri, {
-  useNewUrlParser: true,
-  // useCreateIndex: true,
-  useUnifiedTopology: true,
-});
+dotenv.config({ path: './config.env' });
+const database = process.env.DATABASE.replace(
+  '<PASSWORD>',
+  process.env.DATABASE_PASSWORD,
+);
 
-mongoose.connection.on('connected', () => {
-  console.log('Connected to mongo instance');
-});
-
-mongoose.connection.on('error', (err) => {
-  console.log('Error connecting to mongo', err);
-});
+mongoose
+  .connect(database)
+  .then(() => console.log('connected to db'))
+  .catch((error) => console.log(error));
 
 app.get('/', (req, res) => {
   res.send('Welcome to backend');
