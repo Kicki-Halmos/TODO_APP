@@ -46,44 +46,41 @@ export const fetchTodoItem = (id) => async () => {
   }
   const todoItem = response.data;
 
-  // console.log(todoItem);
-
   return todoItem;
 };
 
-export const postTodoItem = (title, body) =>
-  // console.log(title);
-  async (dispatch) => {
-    const fetchData = async () => {
-      const response = await addTodoItem({
-        title,
-        body,
-      });
+export const postTodoItem = (title, body) => async (dispatch) => {
+  const fetchData = async () => {
+    const response = await addTodoItem({
+      title,
+      body,
+    });
 
-      if (response.statusText !== 'OK') {
-        throw new Error('Could not post todo item!');
-      }
-
-      const { data } = response;
-      return data.data;
-    };
-
-    try {
-      const todoItem = await fetchData();
-      dispatch(
-        todoActions.addTodoItem({
-          todoItem,
-        }),
-      );
-    } catch (error) {
-      console.log(error.response);
-      dispatch(
-        userActions.addErrorMessage({
-          errorMessage: error.response.data.error,
-        }),
-      );
+    if (response.statusText !== 'OK') {
+      throw new Error('Could not post todo item!');
     }
+
+    const { data } = response;
+    return data.data;
   };
+
+  try {
+    const todoItem = await fetchData();
+    dispatch(
+      todoActions.addTodoItem({
+        todoItem,
+      }),
+    );
+  } catch (error) {
+    console.log(error.response);
+    dispatch(
+      userActions.addErrorMessage({
+        errorMessage: error.response.data.error,
+      }),
+    );
+  }
+};
+
 export const putTodoItem = (id, title, body) => async (dispatch) => {
   const fetchData = async () => {
     const response = await updateTodoItem(id, title, body);

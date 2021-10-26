@@ -2,7 +2,7 @@
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import React, { useState, useRef } from 'react';
-// import MDEditor from '@uiw/react-md-editor';
+import MDEditor from '@uiw/react-md-editor';
 import { putTodoItem, postTodoItem } from '../store/todo-actions';
 
 const TodoForm = ({
@@ -21,32 +21,24 @@ const TodoForm = ({
     setTitle(event.target.value);
   };
 
-  const bodyChangeHandler = (event) => {
+  /* const bodyChangeHandler = (event) => {
     setBody(event.target.value);
-  };
+  }; */
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
 
     const titleFinal = titleInput.current.value.trim();
-    const splitContent = bodyInput.current.value.trim().split('\n');
-    let markDownBody = '';
-
-    splitContent.forEach((item) => {
-      markDownBody += (`* ${item}\n`);
-    });
-
-    console.log(markDownBody);
 
     if (onFormSubmit === 'Update') {
-      dispatch(putTodoItem(id, titleFinal, markDownBody));
+      dispatch(putTodoItem(id, titleFinal, body));
     } else {
-      dispatch(postTodoItem(titleFinal, markDownBody));
+      dispatch(postTodoItem(titleFinal, body));
     }
     history.push('/todo-list');
   };
   return (
-    <div className="p-6 max-w-xs mx-auto bg-white rounded-xl shadow-md items-center space-x-4">
+    <div className="p-6 max-w-m mx-auto bg-white rounded-xl shadow-md items-center space-x-4">
       <form onSubmit={formSubmitHandler}>
         <input
           className="text-lg m-2 p-2 border-2 rounded-lg"
@@ -57,10 +49,10 @@ const TodoForm = ({
           onChange={titleChangeHandler}
           ref={titleInput}
         />
-        <textarea
+        <MDEditor
           name="body"
           id="body"
-          onChange={bodyChangeHandler}
+          onChange={setBody}
           ref={bodyInput}
           className="m-2 p-2 border-2 rounded-lg"
           value={body}

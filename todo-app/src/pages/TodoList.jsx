@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -16,10 +17,6 @@ const TodoList = () => {
   useEffect(() => {
     dispatch(fetchTodoList());
   }, [dispatch]);
-
-  if (todoList && todoList.length > 0) {
-    // console.log(todoList);
-  }
 
   return (
     <div className="grid grid-cols-4 gap-4">
