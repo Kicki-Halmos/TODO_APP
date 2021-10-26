@@ -12,7 +12,7 @@ const Nav = () => {
 
   return (
     <div className="fixed bg-gray-400 w-screen p-4 flex justify-between">
-      <p className="font-extrabold text-xl ">TODO APP</p>
+      <a href="/" className="font-extrabold text-xl ">TODO APP</a>
       {token && <button type="button" className="" onClick={logoutHandler}>Logout</button>}
     </div>
   );

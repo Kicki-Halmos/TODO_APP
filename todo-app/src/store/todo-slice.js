@@ -22,9 +22,11 @@ const todoSlice = createSlice({
       console.log('hej');
       const { id } = action.payload;
       console.log(action.payload);
-      state.todoList.map((item) => (item._id === id
+      const updatedTodoList = state.todoList.map((item) => (item._id === id
         ? { title: action.payload.title, body: action.payload.body }
         : item));
+      console.log(updatedTodoList);
+      state.todoList = updatedTodoList;
     },
 
     deleteTodoItem(state, action) {

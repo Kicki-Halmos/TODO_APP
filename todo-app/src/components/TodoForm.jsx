@@ -21,10 +21,6 @@ const TodoForm = ({
     setTitle(event.target.value);
   };
 
-  /* const bodyChangeHandler = (event) => {
-    setBody(event.target.value);
-  }; */
-
   const formSubmitHandler = (event) => {
     event.preventDefault();
 

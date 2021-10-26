@@ -8,9 +8,10 @@ import { removeTodoItem } from '../store/todo-actions';
 
 const TodoItem = (props) => {
   const dispatch = useDispatch();
-
-  const lastEdited = props.lastEdited.slice(0, 10);
-
+  let lastEdited = '';
+  if (props.lastEdited) {
+    lastEdited = props.lastEdited.slice(0, 10);
+  }
   const deleteItem = () => {
     dispatch(removeTodoItem(props.id));
   };
