@@ -72,7 +72,6 @@ export const postTodoItem = (title, body) => async (dispatch) => {
       }),
     );
   } catch (error) {
-    console.log(error.response);
     dispatch(
       userActions.addErrorMessage({
         errorMessage: error.response.data.error,
@@ -84,19 +83,18 @@ export const postTodoItem = (title, body) => async (dispatch) => {
 export const putTodoItem = (id, title, body) => async (dispatch) => {
   const fetchData = async () => {
     const response = await updateTodoItem(id, title, body);
-
     if (response.statusText !== 'OK') {
       throw new Error('Could not update todo item!');
     }
+    const { data } = response;
+    return data.data;
   };
 
   try {
-    await fetchData();
+    const updatedItem = await fetchData();
     dispatch(
       todoActions.updateTodoItem({
-        id,
-        title,
-        body,
+        updatedItem,
       }),
     );
   } catch (error) {

@@ -57,7 +57,7 @@ const updateTodoItem = async (req, res) => {
 
       return res.status(200).json({
         success: true,
-        id: updatedItem._id,
+        data: updatedItem,
         message: 'Todo item was updated',
       });
     })
