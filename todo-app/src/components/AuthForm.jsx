@@ -1,17 +1,18 @@
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { useState } from "react";
-import { postLogin, postSignup, clearErrorMessage } from "../store/user-actions";
-
+/* eslint-disable react/prop-types */
+/* eslint-disable jsx-a11y/label-has-associated-control */
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { postLogin, postSignup, clearErrorMessage } from '../store/user-actions';
 
 const AuthForm = ({ btnText, linkText, linkTo }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const dispatch = useDispatch();
 
   const clearError = () => {
     dispatch(clearErrorMessage());
-  }
+  };
 
   const emailChangeHandler = (event) => {
     setEmail(event.target.value.trim());
@@ -23,15 +24,15 @@ const AuthForm = ({ btnText, linkText, linkTo }) => {
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
-    
-    if (linkTo === "/signup") {
+
+    if (linkTo === '/signup') {
       dispatch(postLogin(email, password));
     } else {
       dispatch(postSignup(email, password));
     }
 
-    setEmail("");
-    setPassword("");
+    setEmail('');
+    setPassword('');
   };
 
   return (
@@ -61,15 +62,15 @@ const AuthForm = ({ btnText, linkText, linkTo }) => {
             onChange={passwordChangeHandler}
             value={password}
           />
-       
-        <input
-          className="py-2 px-4 m-2 font-semibold rounded-lg shadow-md text-white bg-green-500 hover:bg-green-700 cursor-pointer"
-          type="submit"
-          value={btnText}
-        />
-        <Link to={linkTo}>
-          <button onClick={clearError}className="text-green-600 text-bold pl-3">{linkText}</button>
-        </Link>
+
+          <input
+            className="py-2 px-4 m-2 font-semibold rounded-lg shadow-md text-white bg-green-500 hover:bg-green-700 cursor-pointer"
+            type="submit"
+            value={btnText}
+          />
+          <Link to={linkTo}>
+            <button type="button" onClick={clearError} className="text-green-600 text-bold pl-3">{linkText}</button>
+          </Link>
         </div>
       </form>
     </div>

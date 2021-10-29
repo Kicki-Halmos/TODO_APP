@@ -1,15 +1,15 @@
-import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
-import {  useDispatch } from "react-redux";
-import { tryLocalLogin } from "../store/user-actions";
-import TodoForm from "../components/TodoForm";
-import { getTodoitem } from "../api/api";
+import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { tryLocalLogin } from '../store/user-actions';
+import TodoForm from '../components/TodoForm';
+import { getTodoitem } from '../api/api';
 
 const TodoDetail = () => {
   const params = useParams();
   const dispatch = useDispatch();
 
-  const id = params.id;
+  const { id } = params;
   const [item, setItem] = useState();
 
   useEffect(() => {
@@ -19,13 +19,13 @@ const TodoDetail = () => {
   useEffect(() => {
     async function fetchtodoItem() {
       const response = await getTodoitem(id);
-      
+
       const clearMarkdown = response.data.data.body.replaceAll('*', '');
       console.log(clearMarkdown);
       const todoItem = {
         title: response.data.data.title,
-        body: clearMarkdown
-      }
+        body: clearMarkdown,
+      };
       setItem(todoItem);
     }
 

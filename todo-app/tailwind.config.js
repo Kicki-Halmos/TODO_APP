@@ -4,12 +4,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#ff4800"
-      }
+        primary: '#ff4800',
+      },
     },
   },
   variants: {
     extend: {},
   },
   plugins: [],
-}
+};
