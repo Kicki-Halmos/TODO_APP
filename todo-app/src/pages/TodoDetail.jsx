@@ -20,11 +20,9 @@ const TodoDetail = () => {
     async function fetchtodoItem() {
       const response = await getTodoitem(id);
 
-      const clearMarkdown = response.data.data.body.replaceAll('*', '');
-      console.log(clearMarkdown);
       const todoItem = {
         title: response.data.data.title,
-        body: clearMarkdown,
+        body: response.data.data.body,
       };
       setItem(todoItem);
     }

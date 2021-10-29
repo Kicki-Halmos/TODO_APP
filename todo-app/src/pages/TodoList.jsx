@@ -12,9 +12,6 @@ const TodoList = () => {
 
   useEffect(() => {
     dispatch(tryLocalLogin());
-  }, [dispatch]);
-
-  useEffect(() => {
     dispatch(fetchTodoList());
   }, [dispatch]);
 

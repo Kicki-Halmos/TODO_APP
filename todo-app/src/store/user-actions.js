@@ -48,39 +48,34 @@ export const postSignup = (email, password) => async (dispatch) => {
   }
 };
 
-export const postLogin = (email, password) => {
-  console.log(email, password);
-  return async (dispatch) => {
-    const fetchData = async () => {
-      const response = await login(email, password);
+export const postLogin = (email, password) => async (dispatch) => {
+  const fetchData = async () => {
+    const response = await login(email, password);
 
-      if (response.statusText !== 'OK') {
-        throw new Error('Could not signup user');
-      }
-
-      const { data } = response;
-      localStorage.setItem('token', data.data.token);
-
-      return data;
-    };
-
-    try {
-      const user = await fetchData();
-      dispatch(
-        userActions.login({
-          token: user.data.token,
-        }),
-      );
-      history.push('/');
-    } catch (error) {
-      console.log(error.response);
-      dispatch(
-        userActions.addErrorMessage({
-          errorMessage: error.response.data.error,
-        }),
-      );
+    if (response.statusText !== 'OK') {
+      throw new Error('Could not signup user');
     }
+
+    const { data } = response;
+    localStorage.setItem('token', data.data.token);
+    return data;
   };
+
+  try {
+    const user = await fetchData();
+    dispatch(
+      userActions.login({
+        token: user.data.token,
+      }),
+    );
+    history.push('/');
+  } catch (error) {
+    dispatch(
+      userActions.addErrorMessage({
+        errorMessage: error.response.data.error,
+      }),
+    );
+  }
 };
 
 export const logout = () => (dispatch) => {

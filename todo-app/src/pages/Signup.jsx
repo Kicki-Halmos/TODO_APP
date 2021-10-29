@@ -5,7 +5,7 @@ import ErrorMessage from '../components/ErrorMessage';
 
 const Signup = () => {
   const errorMessage = useSelector((state) => state.user.errorMessage);
-  console.log(errorMessage);
+
   return (
     <div>
       {errorMessage !== '' && <ErrorMessage msg={errorMessage} />}
