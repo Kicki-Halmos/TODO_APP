@@ -9,6 +9,7 @@ import TodoItem from '../components/TodoItem';
 const TodoList = () => {
   const dispatch = useDispatch();
   const todoList = useSelector((state) => state.todo.todoList);
+  console.log(todoList);
 
   useEffect(() => {
     dispatch(tryLocalLogin());
