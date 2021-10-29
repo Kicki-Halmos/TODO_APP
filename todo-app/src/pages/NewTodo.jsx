@@ -8,7 +8,7 @@ const NewTodo = () => {
 
   useEffect(() => {
     dispatch(tryLocalLogin());
-  }, []);
+  }, [dispatch]);
   return (
     <div>
       <TodoForm
