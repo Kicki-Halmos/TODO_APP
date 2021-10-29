@@ -16,15 +16,14 @@ const todoSlice = createSlice({
 
     addTodoItem(state, action) {
       const newItem = action.payload.todoItem;
-      state.todoList = [...state.todoList, newItem];
+      state.todoList.push(newItem);
     },
 
     updateTodoItem(state, action) {
       const { updatedItem } = action.payload;
-      const updatedTodoList = state.todoList.map((item) => (item._id === updatedItem._id
+      state.todoList.map((item) => (item._id === updatedItem._id
         ? action.payload
         : item));
-      state.todoList = updatedTodoList;
     },
 
     deleteTodoItem(state, action) {
