@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import { todoActions } from './todo-slice';
 import { todoApis } from '../api/api';
 import { userActions } from './user-slice';
@@ -67,9 +68,7 @@ export const postTodoItem = (title, body) => async (dispatch) => {
   try {
     const todoItem = await fetchData();
     dispatch(
-      todoActions.addTodoItem({
-        todoItem,
-      }),
+      todoActions.addTodoItem(todoItem),
     );
   } catch (error) {
     dispatch(
@@ -93,9 +92,9 @@ export const putTodoItem = (id, title, body) => async (dispatch) => {
   try {
     const updatedItem = await fetchData();
     dispatch(
-      todoActions.updateTodoItem({
+      todoActions.updateTodoItem(
         updatedItem,
-      }),
+      ),
     );
   } catch (error) {
     dispatch(

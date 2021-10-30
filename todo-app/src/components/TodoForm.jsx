@@ -8,6 +8,7 @@ import { putTodoItem, postTodoItem } from '../store/todo-actions';
 const TodoForm = ({
   initialValues, id, onFormSubmit, btnText,
 }) => {
+  console.log(initialValues);
   const [title, setTitle] = useState(initialValues.title);
   const [body, setBody] = useState(initialValues.body);
 

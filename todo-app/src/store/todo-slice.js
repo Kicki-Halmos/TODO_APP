@@ -8,21 +8,18 @@ const todoSlice = createSlice({
   initialState: {
     todoList: [],
   },
-
   reducers: {
     getTodoList(state, action) {
       state.todoList = action.payload.todoList;
     },
 
     addTodoItem(state, action) {
-      const newItem = action.payload.todoItem;
-      state.todoList.push(newItem);
+      state.todoList.push(action.payload.todoItem);
     },
 
     updateTodoItem(state, action) {
-      const { updatedItem } = action.payload;
-      state.todoList.map((item) => (item._id === updatedItem._id
-        ? action.payload
+      state.todoList.map((item) => (item._id === action.payload.updatedItem._id
+        ? action.payload.updatedItem
         : item));
     },
 
