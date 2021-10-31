@@ -112,7 +112,7 @@ test('should get todoList', () => {
   });
 });
 
-test('should update a todo-item', () => {
+test('should update a todo item', () => {
   const state = {
     todoList: [
       {
@@ -133,12 +133,11 @@ test('should update a todo-item', () => {
     ],
   };
 
-  expect(todoSlice.reducer(state, todoActions.updateTodoItem({
+  expect(todoSlice.reducer(state, todoActions.addTodoItem({
     updatedItem: {
       _id: 1,
       title: 'my best todo',
-      body: 'buy some more stuff',
-
+      body: 'buy records',
     },
   }))).toEqual({
     todoList: [
@@ -150,7 +149,46 @@ test('should update a todo-item', () => {
       {
         _id: 1,
         title: 'my best todo',
+        body: 'buy records',
+      },
+      {
+        _id: 2,
+        title: 'my third todo',
+        body: 'buy even more stuff',
+      },
+    ],
+  });
+});
+
+test('should delete a todo-item', () => {
+  const state = {
+    todoList: [
+      {
+        _id: 0,
+        title: 'my todo',
+        body: 'buy stuff',
+      },
+      {
+        _id: 1,
+        title: 'my second todo',
         body: 'buy some more stuff',
+      },
+      {
+        _id: 2,
+        title: 'my third todo',
+        body: 'buy even more stuff',
+      },
+    ],
+  };
+
+  expect(todoSlice.reducer(state, todoActions.deleteTodoItem({
+    id: 1,
+  }))).toEqual({
+    todoList: [
+      {
+        _id: 0,
+        title: 'my todo',
+        body: 'buy stuff',
       },
       {
         _id: 2,

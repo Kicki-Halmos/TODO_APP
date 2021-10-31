@@ -18,9 +18,11 @@ const todoSlice = createSlice({
     },
 
     updateTodoItem(state, action) {
-      state.todoList.map((item) => (item._id === action.payload.updatedItem._id
+      const updatedList = state.todoList.map((item) => (item._id === action.payload.updatedItem._id
         ? action.payload.updatedItem
         : item));
+
+      state.todoList = updatedList;
     },
 
     deleteTodoItem(state, action) {

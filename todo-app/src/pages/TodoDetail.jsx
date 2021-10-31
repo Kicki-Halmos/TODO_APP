@@ -10,7 +10,7 @@ const TodoDetail = () => {
   const dispatch = useDispatch();
 
   const { id } = params;
-  const [item, setItem] = useState({});
+  const [item, setItem] = useState();
 
   useEffect(() => {
     dispatch(tryLocalLogin());
@@ -24,7 +24,6 @@ const TodoDetail = () => {
         title: response.data.data.title,
         body: response.data.data.body,
       };
-      console.log(todoItem);
       setItem(todoItem);
     }
 

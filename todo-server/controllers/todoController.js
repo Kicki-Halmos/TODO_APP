@@ -46,7 +46,7 @@ const updateTodoItem = async (req, res) => {
   await Todo.findByIdAndUpdate(req.params.id, {
     title: body.title,
     body: body.body,
-  })
+  }, { new: true })
     .exec()
     .then((updatedItem) => {
       if (!updatedItem) {
