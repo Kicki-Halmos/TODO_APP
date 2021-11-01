@@ -7,9 +7,9 @@ const getTodoList = async (userId) => {
   // get todolist from mongodb
   try {
     const todoList = await Todo.find({ userId }).exec();
-    return { success: true, data: todoList };
+    return { status: 200, success: true, data: todoList };
   } catch (error) {
-    return { success: false, error };
+    return { status: 404, success: false, error: 'Todo-list not found' };
   }
 };
 
@@ -18,15 +18,15 @@ const getTodoById = async (id) => {
   try {
     const todoItem = await Todo.findOne({ _id: id })
       .exec();
-    return { success: true, data: todoItem };
+    return { status: 200, success: true, data: todoItem };
   } catch (error) {
-    return { success: false, error };
+    return { status: 404, success: false, error: 'Todo item not found' };
   }
 };
 
 const updateTodoItem = async (id, body) => {
   // update todo item and post to mongodDB
-  if (!body) return { success: false, error: 'You must provide a body to update' };
+  if (!body) return { status: 400, success: false, error: 'You must provide a body to update' };
 
   try {
     const updatedItem = await Todo.findByIdAndUpdate(id, {
@@ -35,18 +35,19 @@ const updateTodoItem = async (id, body) => {
     }, { new: true })
       .exec();
     return {
+      status: 200,
       success: true,
       data: updatedItem,
       message: 'Todo item was updated',
     };
   } catch (error) {
-    return { success: false, error };
+    return { status: 400, success: false, error: 'Todo item was not updated' };
   }
 };
 
 const createTodo = async (id, body) => {
   // post todo item to mongoDB
-  if (!body) return { success: false, error: 'You must provide a todo item' };
+  if (!body) return { status: 400, success: false, error: 'You must provide a todo item' };
 
   try {
     const todoItem = await new Todo({
@@ -57,13 +58,16 @@ const createTodo = async (id, body) => {
     todoItem
       .save();
     return {
+      status: 200,
       success: true,
       id: todoItem._id,
       message: 'Todo item created',
       data: todoItem,
     };
   } catch (error) {
-    return { success: false, error, message: 'Todo item not created' };
+    return {
+      status: 400, success: false, error, message: 'Todo item not created',
+    };
   }
 };
 
@@ -72,9 +76,9 @@ const deleteTodoItem = async (id) => {
   try {
     await Todo.findOneAndDelete({ _id: id })
       .exec();
-    return { success: true, message: 'Todo item deleted' };
+    return { status: 200, success: true, message: 'Todo item deleted' };
   } catch (error) {
-    return { success: false, error };
+    return { status: 400, success: false, error };
   }
 };
 
