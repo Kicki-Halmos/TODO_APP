@@ -133,7 +133,7 @@ test('should update a todo item', () => {
     ],
   };
 
-  expect(todoSlice.reducer(state, todoActions.addTodoItem({
+  expect(todoSlice.reducer(state, todoActions.updateTodoItem({
     updatedItem: {
       _id: 1,
       title: 'my best todo',
