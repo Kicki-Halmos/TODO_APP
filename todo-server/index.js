@@ -20,14 +20,16 @@ const database = process.env.DATABASE.replace(
 );
 
 mongoose
-  .connect(database)
-  .then(() => console.log('connected to db'))
-  .catch((error) => console.log(error));
+  .connect(database);
+/* .then(() => console.log('connected to db'))
+  .catch((error) => console.log(error)); */
 
-app.get('/', (req, res) => {
+/* app.get('/', (req, res) => {
   res.send('Welcome to backend');
-});
+}); */
 
 app.listen(3000, () => {
-  console.log('Listening on port 3000');
+  // console.log('Listening on port 3000');
 });
+
+module.exports = app;
