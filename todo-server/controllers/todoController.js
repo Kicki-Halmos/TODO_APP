@@ -3,109 +3,83 @@
 
 const Todo = require('../models/Todo');
 
-const getTodoList = async (req, res) => {
+const getTodoList = async (userId) => {
   // get todolist from mongodb
-  await Todo.find({ userId: req.user._id })
-    .exec()
-    .then((todoList) => {
-      if (!todoList) {
-        return res
-          .status(404)
-          .json({ success: false, error: 'Todo-list not found' });
-      }
-      return res.status(200).json({ success: true, data: todoList });
-    })
-    .catch((err) => res.status(400).json({ success: false, error: err }));
+  try {
+    const todoList = await Todo.find({ userId }).exec();
+    return { status: 200, success: true, data: todoList };
+  } catch (error) {
+    return { status: 404, success: false, error: 'Todo-list not found' };
+  }
 };
 
-const getTodoById = async (req, res) => {
+const getTodoById = async (id) => {
   // get single todo by ID from mongodb
-  await Todo.findOne({ _id: req.params.id })
-    .exec()
-    .then((todoItem) => {
-      if (!todoItem) {
-        return res
-          .status(404)
-          .json({ success: false, error: 'Todo item not found' });
-      }
-
-      return res.status(200).json({ success: true, data: todoItem });
-    })
-    .catch((err) => res.status(400).json({ success: false, error: err }));
+  try {
+    const todoItem = await Todo.findOne({ _id: id })
+      .exec();
+    return { status: 200, success: true, data: todoItem };
+  } catch (error) {
+    return { status: 404, success: false, error: 'Todo item not found' };
+  }
 };
 
-const updateTodoItem = async (req, res) => {
+const updateTodoItem = async (id, body) => {
   // update todo item and post to mongodDB
+  if (!body) return { status: 400, success: false, error: 'You must provide a body to update' };
 
-  const { body } = req;
-  if (!body) {
-    return res
-      .status(400)
-      .json({ success: false, error: 'You must provide a body to update' });
+  try {
+    const updatedItem = await Todo.findByIdAndUpdate(id, {
+      title: body.title,
+      body: body.body,
+    }, { new: true })
+      .exec();
+    return {
+      status: 200,
+      success: true,
+      data: updatedItem,
+      message: 'Todo item was updated',
+    };
+  } catch (error) {
+    return { status: 400, success: false, error: 'Todo item was not updated' };
   }
-  await Todo.findByIdAndUpdate(req.params.id, {
-    title: body.title,
-    body: body.body,
-  })
-    .exec()
-    .then((updatedItem) => {
-      if (!updatedItem) {
-        return res
-          .status(404)
-          .json({ success: false, error: 'Todo item not found' });
-      }
-
-      return res.status(200).json({
-        success: true,
-        data: updatedItem,
-        message: 'Todo item was updated',
-      });
-    })
-
-    .catch((err) => res.status(400).json({ success: false, error: err }));
 };
 
-const createTodo = async (req, res) => {
+const createTodo = async (id, body) => {
   // post todo item to mongoDB
-  const { body } = req;
-  // console.log(body.title);
-  if (!body) {
-    return res
-      .status(400)
-      .json({ success: false, error: 'You must provide a todo item' });
-  }
-  const todoItem = await new Todo({
-    title: body.title.title,
-    body: body.title.body,
-    userId: req.user._id,
-  });
+  if (!body) return { status: 400, success: false, error: 'You must provide a todo item' };
 
-  todoItem
-    .save()
-    .then(() => res.status(200).json({
+  try {
+    const todoItem = await new Todo({
+      title: body.title.title,
+      body: body.title.body,
+      userId: id,
+    });
+    todoItem
+      .save();
+    return {
+      status: 200,
       success: true,
       id: todoItem._id,
       message: 'Todo item created',
       data: todoItem,
-    }))
-    .catch((err) => res.status(400).json({ error: err, message: 'Todo item not created' }));
+    };
+  } catch (error) {
+    return {
+      status: 400, success: false, error, message: 'Todo item not created',
+    };
+  }
 };
 
-const deleteTodoItem = async (req, res) => {
+const deleteTodoItem = async (id) => {
   // find single todo by ID and delete from mongoDB
-  await Todo.findOneAndDelete({ _id: req.params.id })
-    .exec()
-    .then((todo) => {
-      if (!todo) {
-        return res
-          .status(404)
-          .json({ success: false, error: 'Todo item not found' });
-      }
-      return res
-        .status(200)
-        .json({ success: true, message: 'Todo item deleted' });
-    })
-    .catch((err) => res.status(400).json({ success: false, error: err }));
+  try {
+    await Todo.findOneAndDelete({ _id: id })
+      .exec();
+    return { status: 200, success: true, message: 'Todo item deleted' };
+  } catch (error) {
+    return { status: 400, success: false, error };
+  }
 };
 
 module.exports = {

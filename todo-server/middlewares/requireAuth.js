@@ -12,7 +12,7 @@ module.exports = (req, res, next) => {
   }
 
   const token = authorization.replace('Bearer ', '');
-  jwt.verify(token, 'My_boli_token', async (err, payload) => {
+  jwt.verify(token, process.env.JWT_SECRET, async (err, payload) => {
     if (err) {
       return res.status(401).json({ success: false, error: 'You must be logged in' });
     }
