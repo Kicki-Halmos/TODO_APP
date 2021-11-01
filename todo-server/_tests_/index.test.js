@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-useless-concat */
 /* eslint-disable quotes */
 /* eslint-disable no-use-before-define */
