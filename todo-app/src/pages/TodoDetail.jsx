@@ -14,7 +14,7 @@ const TodoDetail = () => {
 
   useEffect(() => {
     dispatch(tryLocalLogin());
-  });
+  }, []);
 
   useEffect(() => {
     async function fetchtodoItem() {
