@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'https://intense-woodland-65776.herokuapp.com/',
 });
 
 export const addTodoItem = (title, body) => api.post('/api/todo-list', { title, body });
