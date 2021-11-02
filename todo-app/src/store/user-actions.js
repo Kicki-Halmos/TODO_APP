@@ -39,7 +39,7 @@ export const postSignup = (email, password) => async (dispatch) => {
         token: user.data.token,
       }),
     );
-    history.push('/');
+    history.push('/todo-list');
   } catch (error) {
     dispatch(
       userActions.addErrorMessage({
@@ -69,7 +69,7 @@ export const postLogin = (email, password) => async (dispatch) => {
         token: user.data.token,
       }),
     );
-    history.push('/');
+    history.push('/todo-list');
   } catch (error) {
     dispatch(
       userActions.addErrorMessage({

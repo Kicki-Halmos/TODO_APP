@@ -7,8 +7,9 @@ const requireAuth = require('../middlewares/requireAuth');
 const router = express.Router();
 
 router.get('/api/todo-list', requireAuth, async (req, res) => {
-  const id = await req.user._id;
-  const result = await todoCtrl.getTodoList(id);
+  console.log(req.user);
+  // const id = req.user._id;
+  const result = await todoCtrl.getTodoList(req.user._id);
   if (result.success) {
     return res.status(result.status).json(result);
   }
