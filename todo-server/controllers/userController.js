@@ -3,6 +3,7 @@
 /* eslint-disable no-shadow */
 const jwt = require('jsonwebtoken');
 const validator = require('validator');
+const bcrypt = require('bcrypt');
 const User = require('../models/User');
 
 const signup = async (body) => {
@@ -60,9 +61,12 @@ const login = async (body) => {
   try {
     const user = await User.findOne({ email })
       .exec();
-    user.comparePassword(password);
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
-    return { status: 200, success: true, data: { token } };
+    const match = await bcrypt.compare(password, user.password);
+    if (match) {
+      const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
+      return { status: 200, success: true, data: { token } };
+    }
+    return { status: 401, success: false, error: 'Invalid password or email' };
   } catch (error) {
     return { status: 401, success: false, error: 'Invalid password or email' };
   }

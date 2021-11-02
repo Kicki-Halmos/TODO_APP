@@ -1,12 +1,13 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable consistent-return */
 /* eslint-disable no-underscore-dangle */
 
 const Todo = require('../models/Todo');
 
-const getTodoList = async (userId) => {
+const getTodoList = async (id) => {
   // get todolist from mongodb
   try {
-    const todoList = await Todo.find({ userId }).exec();
+    const todoList = await Todo.find({ userId: id }).exec();
     return { status: 200, success: true, data: todoList };
   } catch (error) {
     return { status: 404, success: false, error: 'Todo-list not found' };
