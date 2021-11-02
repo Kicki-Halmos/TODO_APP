@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 /* eslint-disable prefer-promise-reject-errors */
 /* eslint-disable no-shadow */
 /* eslint-disable consistent-return */

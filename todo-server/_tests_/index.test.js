@@ -14,7 +14,7 @@ test('that request returns 200 with authentication header set', async () => {
   expect(statusCode).toBe(200);
 });
 
-test('that request returns 200 with authentication header set', async () => {
+test('that request returns 401 without authentication header set', async () => {
   const response = await request(app)
     .get('/api/todo-list');
   const { statusCode } = response;
