@@ -13,7 +13,7 @@ const TodoList = () => {
   useEffect(() => {
     dispatch(tryLocalLogin());
     dispatch(fetchTodoList());
-  }, [dispatch]);
+  }, []);
 
   return (
     <div className="grid grid-cols-4 gap-4">

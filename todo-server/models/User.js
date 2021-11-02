@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 /* eslint-disable prefer-promise-reject-errors */
 /* eslint-disable no-shadow */
 /* eslint-disable consistent-return */
@@ -37,21 +38,5 @@ userSchema.pre('save', function (next) {
     });
   });
 });
-
-userSchema.methods.comparePassword = function (candidatePassword) {
-  const user = this;
-  return new Promise((resolve, reject) => {
-    bcrypt.comparePassword(candidatePassword, user.password, (err, isMatch) => {
-      if (err) {
-        return reject(err);
-      }
-      if (!isMatch) {
-        return reject(false);
-      }
-
-      resolve(true);
-    });
-  });
-};
 
 module.exports = mongoose.model('User', userSchema);

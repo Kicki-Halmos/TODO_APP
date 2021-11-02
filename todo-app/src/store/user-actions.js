@@ -1,6 +1,7 @@
 import { userActions } from './user-slice';
 import { userApis } from '../api/api';
 import history from '../utils/history';
+import { todoActions } from './todo-slice';
 
 const { signup, login } = userApis;
 
@@ -38,7 +39,7 @@ export const postSignup = (email, password) => async (dispatch) => {
         token: user.data.token,
       }),
     );
-    history.push('/');
+    history.push('/todo-list');
   } catch (error) {
     dispatch(
       userActions.addErrorMessage({
@@ -68,7 +69,7 @@ export const postLogin = (email, password) => async (dispatch) => {
         token: user.data.token,
       }),
     );
-    history.push('/');
+    history.push('/todo-list');
   } catch (error) {
     dispatch(
       userActions.addErrorMessage({
@@ -80,6 +81,7 @@ export const postLogin = (email, password) => async (dispatch) => {
 
 export const logout = () => (dispatch) => {
   dispatch(userActions.logout());
+  dispatch(todoActions.clearTodoList());
   localStorage.removeItem('token');
   history.push('/login');
 };
