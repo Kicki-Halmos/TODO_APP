@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable eqeqeq */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-param-reassign */
@@ -28,6 +29,9 @@ const todoSlice = createSlice({
     deleteTodoItem(state, action) {
       const { id } = action.payload;
       state.todoList = state.todoList.filter((item) => item._id !== id);
+    },
+    clearTodoList(state, action) {
+      state.todoList = [];
     },
   },
 });

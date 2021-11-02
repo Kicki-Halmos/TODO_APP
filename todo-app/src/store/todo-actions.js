@@ -27,7 +27,7 @@ export const fetchTodoList = () => async (dispatch) => {
     const todoList = await fetchData();
     dispatch(
       todoActions.getTodoList({
-        todoList: todoList.data || [],
+        todoList: todoList.data,
       }),
     );
   } catch (error) {

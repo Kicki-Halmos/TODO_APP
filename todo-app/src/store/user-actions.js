@@ -1,6 +1,7 @@
 import { userActions } from './user-slice';
 import { userApis } from '../api/api';
 import history from '../utils/history';
+import { todoActions } from './todo-slice';
 
 const { signup, login } = userApis;
 
@@ -80,6 +81,7 @@ export const postLogin = (email, password) => async (dispatch) => {
 
 export const logout = () => (dispatch) => {
   dispatch(userActions.logout());
+  dispatch(todoActions.clearTodoList());
   localStorage.removeItem('token');
   history.push('/login');
 };
