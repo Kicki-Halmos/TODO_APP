@@ -13,10 +13,10 @@ app.use(cors());
 app.use(express.json());
 app.use(todoRoutes);
 app.use(userRoutes);
-app.use(express.static(path.join(__dirname, '../todo-app/build')));
+app.use(express.static(path.join(__dirname, 'build')));
 
 app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../todo-app/build', 'index.html'));
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 dotenv.config({ path: './config.env' });
